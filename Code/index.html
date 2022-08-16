@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calender</title>
+</head>
+
+<body>
+<html ng-app="calender-App" ng-cloak="true"></html>
+<div Class='calender' ng-controller="Calendarcontroller as calender">
+    <div class="calender-left">
+        <div class="header">
+            <i class="material-icons" ng-click="calender.prev()">navigate_before</i>
+            <h1>{{calender.month}}</h1>
+            <i class="material-icons" ng-click="calender.next()">navigate_next</i>
+        </div>
+        <div class="days">
+            <div class="day-item">Mon</div>
+            <div class="day-item">Tue</div>
+            <div class="day-item">Wed</div>
+            <div class="day-item">Thu</div>
+            <div class="day-item">Fri</div>
+            <div class="day-item">Sat</div>
+            <div class="day-item">Sun</div>
+        </div>
+        <div class="dates"></div>
+    </div>
+
+    <div class="calender-right">
+        <div class="list">
+            <ul>
+                <li class="bounce-in" ng-repeat="events in calender.events" ng-show="events.id===calender.dataId">
+                    <span Class="type">It is a {{event.type}} things</span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

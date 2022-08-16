@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calender</title>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    
+
+    <script>
+
+        function current_date(){
+            
+            var today=new Date();
+            currentdate=[today.getFullYear(),today.getMonth()+1,today.getDate()];
+            return currentdate;
+        }
+        
+        let Syear=current_date()[0];
+        let Smonth=current_date()[1];
+        let Sday=current_date()[2];
+        let select_mon=Smonth;
+        let select_year=Syear;
+
+        function show_calender(year,month){
+            document.getElementById('dates').innerHTML="";
+
+            var week=new Date(year,month-1,0).getDay();
+            var month_day=new Date(year,month,0).getDate();
+
+            document.getElementById('year').innerHTML=year;
+            document.getElementById('month_abr').innerHTML=current_month(month-1);
+            
+
+            if(month==1){
+                last_year=year-1;
+                last_month=12;
+            }else{
+                last_year=year;
+                last_month=month-1;
+            }
+
+            var last_month_day=new Date(last_year,last_month,0).getDate();
+
+            for(var i=last_month_day-week+1;i<=last_month_day;i++){
+                const newdiv=document.createElement('div');
+                newdiv.classList.add('prev_date_item');
+                newdiv.textContent=i;
+                document.getElementById('dates').appendChild(newdiv);
+            }
+
+            for(var i=1;i<=month_day;i++){
+                var uidi=i;
+                var uidm=month;
+                var uid=uidi.toString()+uidm.toString();
+                const newdiv=document.createElement('div');
+                newdiv.classList.add('date_item');
+                newdiv.textContent=i;
+                document.getElementById('dates').appendChild(newdiv);
+            }
+
+            const boxes=document.querySelectorAll('.date_item');
+            boxes.forEach(box=>{
+                box.addEventListener('click',select,false);
+            });
+
+            PresentDay(year,month,Sday);
+
+            
+        }
+
+        function current_month(mon){
+            monthRef= ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var monthname=monthRef[mon];
+            return monthname;
+        }
+
+        function PresentDay(year,month,day){
+            if(year==select_year&&month==select_mon)
+            document.querySelectorAll('.date_item')[day-1].classList.add('present');
+        }
+
+        function prev(){
+            if(Smonth==1){
+                Smonth=12;
+                Syear=Syear-1;
+            }else{
+                Smonth=Smonth-1;
+            }
+            show_calender(Syear,Smonth);
+        }
+
+        function next(){
+            if(Smonth==12){
+                Smonth=1;
+                Syear=Syear+1;
+            }else{
+                Smonth=Smonth+1;
+            }
+            show_calender(Syear,Smonth);
+        }
+
+        function select(){
+            document.querySelectorAll('.date_item')[Sday-1].classList.remove('present');
+            Sday=this.innerHTML;
+            select_mon=Smonth;
+            select_year=Syear;
+            PresentDay(Syear,Smonth,Sday);
+        }
+
+
+
+
+
+
+
+        
+
+
+
+        
+    </script>
+
+
+    <body>
+        <p>
+        <div class="links">
+            <ul>
+                <li><a href="login.html">Log in</a></li>
+                <li><a href="signup.html" class="btn">Sign up</a></li>
+            </ul>
+        </div>
+        </p>
+        
+
+        
+        <div class='calender'>
+            <div class='calendar_left'>
+                <div class='header'>
+                    <h2 id='year'></h2>
+                </div>
+                <div class='header'>
+                    <i class='material-icons' id='prev'>navigate_before</i>
+                    <h1 id='month_abr'></h1>
+                    <i class='material-icons' id='next'>navigate_next</i>
+                </div>
+                <div class='days'>
+                    <div class='day_item'>Mon</div>
+                    <div class='day_item'>Tue</div>
+                    <div class='day_item'>Wed</div>
+                    <div class='day_item'>Thu</div>
+                    <div class='day_item'>Fri</div>
+                    <div class='day_item'>Sat</div>
+                    <div class='day_item'>Sun</div>
+                </div>
+                <div class='dates' id='dates'></div>
+            </div>
+
+            <div class='calender_right'>
+                <br><br><br><br><br><br><br><br><br>
+                <span class='no_log'>No Events</span>
+            </div>
+        </div>
+        
+
+        
+
+    <script>
+        document.addEventListener("DOMContentLoaded", show_calender(Syear,Smonth), false);
+        document.getElementById("prev").addEventListener("click",prev,false);
+        document.getElementById("next").addEventListener("click",next,false);
+        
+    </script>     
+
+        
+        
+
+        
+
+    </body>
+
+
+</html>

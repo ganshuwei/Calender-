@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charse="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href='index.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+    </head>
+
+    <body>
+        
+        
+           
+            <input type='checkbox' name='' id=''>aaa</span>
+            <div class="plus radius" style="--l:35px;--t:3px;--c2:green"></div>
+            
+            
+        
+    </body>
+
+    <script>
+
+        document.getElementsByClassName('fa-edit')[0].addEventListener('click',function(){
+            alert('yes');
+            document.getElementById('a').contentEditable="true";
+        },false);
+
+        document.getElementById('a').addEventListener('keyup',function(e){
+            if(e.keyCode == 13 && document.getElementById('a').value != ""){
+                document.getElementById('b').innerHTML=document.getElementById('a').textContent;
+                document.getElementById('a').contentEditable="false";
+            }
+        })
+
+        
+    </script>
+</html>
